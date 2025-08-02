@@ -18,7 +18,7 @@ export default function Schedule() {
         { label: 'Dra. Paula Martínez', value: 'dra-paula-martinez' },
         { label: 'Dr. Andrés Sánchez', value: 'dr-andres-sanchez' },
     ]
-    const [selectedDoctor, setSelectedDoctor] = useState<string>('Todos');
+    const [selectedDoctor, setSelectedDoctor] = useState<string>('all');
     // Mock available slots (shared)
     const generateSlots = (): SlotMap => {
         const map: SlotMap = {};
@@ -89,9 +89,6 @@ export default function Schedule() {
                     >
 
                     </Select>
-                    <button className="inline-flex items-center bg-[var(--color-foreground)] text-[var(--color-background)] px-4 py-2 rounded-full shadow hover:opacity-90">
-                        Añadir Médico
-                    </button>
                 </div>
             </header>
 
@@ -99,10 +96,36 @@ export default function Schedule() {
             <div className="flex flex-col lg:flex-row bg-[var(--color-background)] border border-[var(--color-foreground)]/20 rounded-4xl overflow-hidden">
                 {/* Calendar */}
                 <section className="w-full lg:w-2/3 border-b lg:border-b-0 lg:border-r border-[var(--color-foreground)]/20 p-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <button onClick={prevMonth} className="p-1 rounded hover:bg-[var(--color-foreground)]/10">‹</button>
-                        <h2 className="text-lg font-semibold text-[var(--color-foreground)] capitalize">{monthLabel}</h2>
-                        <button onClick={nextMonth} className="p-1 rounded hover:bg-[var(--color-foreground)]/10">›</button>
+                    <div className="flex items-center justify-center mb-4 relative">
+                        <button
+                            onClick={prevMonth}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-[var(--color-foreground)/10] focus:outline-none cursor-pointer"
+                        >
+                            <svg
+                                className="w-6 h-6 text-[var(--color-foreground)]"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <h2 className="text-lg font-semibold capitalize">{monthLabel}</h2>
+                        <button
+                            onClick={nextMonth}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-[var(--color-foreground)/10] focus:outline-none cursor-pointer"
+                        >
+                            <svg
+                                className="w-6 h-6 text-[var(--color-foreground)]"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                     <div className="grid grid-cols-7 gap-1 text-center text-sm mb-2">
                         {weekdayLabels.map(d => <div key={d} className="font-medium opacity-70 text-[var(--color-foreground)]">{d}</div>)}
